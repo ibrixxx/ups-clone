@@ -32,6 +32,10 @@ export const GET_ORDERS = gql`
                         quantity
                     }
                     customer_id
+                    customer {
+                        name
+                        email
+                    }
                 }
             }
             name

@@ -5,15 +5,16 @@ import {Card, Divider, Icon} from "@rneui/themed";
 import MapView, {Marker} from "react-native-maps";
 
 type DeliveryProps = {
-    order: Order
+    order: Order,
+    fullwidth?: boolean
 }
 
-const DeliveryCard = ({order}: DeliveryProps) => {
+const DeliveryCard = ({order, fullwidth}: DeliveryProps) => {
     const tw = useTailwind();
 
     return (
         <Card containerStyle={[
-            tw('rounded-lg my-2'),
+            tw(fullwidth? 'rounded-none m-0 my-2':'rounded-lg my-2'),
             {
                 padding: 0,
                 paddingTop: 15,
@@ -21,17 +22,17 @@ const DeliveryCard = ({order}: DeliveryProps) => {
                 shadowOffset: {width: 0, height: 2},
                 shadowOpacity: 0.2,
                 shadowRadius: 4,
-                backgroundColor: '#59C1CC'
+                backgroundColor: fullwidth? '#EB6A7C':'#59C1CC'
             }
         ]}>
-            <View>
+            <View style={fullwidth && {height: '100%'}}>
                 <Icon
                     type={'entypo'}
                     name={'box'}
                     size={50}
                     color={'white'}
                 />
-                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <View style={{justifyContent: 'center', alignItems: 'center', marginTop: 15}}>
                     <Text style={{color: 'white', marginBottom: 5, fontWeight: 'bold'}}>
                         {order.carrier} - {order.trackingId}
                     </Text>
@@ -74,7 +75,7 @@ const DeliveryCard = ({order}: DeliveryProps) => {
                         latitudeDelta: 0.005,
                         longitudeDelta: 0.005
                     }}
-                    style={[tw('w-full'), {height: 200}]}
+                    style={[tw('w-full'), fullwidth? {flexGrow: 1}:{height: 200}]}
                 >
                     {
                         (order.Lat && order.Lng) ?

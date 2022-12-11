@@ -1,4 +1,4 @@
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {View, Text, SafeAreaView, ScrollView, ActivityIndicator} from 'react-native';
 import {useTailwind} from 'tailwind-rn';
 import {CompositeNavigationProp, useNavigation} from "@react-navigation/native";
@@ -30,6 +30,10 @@ const CustomersScreen: React.FC = () => {
             }
         )
     }, [])
+
+    useEffect(() => {
+        console.log(data)
+    }, [data])
 
     return (
         <ScrollView style={{backgroundColor: '#59C1cc', paddingHorizontal: '5%'}}>
