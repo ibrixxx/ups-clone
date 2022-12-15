@@ -53,11 +53,11 @@ const OrdersScreen = () => {
             </View>
 
             {
-                //@ts-ignore
                 orders?.sort((a, b) => {
-                    if(asc)
-                        return new Date(a.createdAt) > new Date(b.createdAt)
-                    return new Date(a.createdAt) <= new Date(b.createdAt)
+                    if (asc) {
+                        return new Date(a.createdAt) > new Date(b.createdAt) ? 1 : -1;
+                    }
+                    return new Date(a.createdAt) < new Date(b.createdAt) ? 1 : -1;
                 }).map(order => <OrderCard key={order.trackingId} item={order}/>)
             }
         </ScrollView>
